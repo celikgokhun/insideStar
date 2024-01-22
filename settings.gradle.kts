@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "insiderStar"
 include(":app")
- 
+include(":starlib")
