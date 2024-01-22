@@ -41,6 +41,8 @@ dependencies {
     // compose
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("androidx.compose.material3:material3")
+    //gson
+    implementation ("com.google.code.gson:gson:2.10")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
