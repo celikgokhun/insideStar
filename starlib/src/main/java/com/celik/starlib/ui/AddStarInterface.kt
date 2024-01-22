@@ -36,10 +36,13 @@ fun AddStarInterface(context: Context) {
 
     val starsSaved = remember { starViewModel.readDataFromFile(context = context) }
 
-    if (stars.size < starsSaved.size) {
+    if (stars.size < starViewModel.readDataFromFile(context = context).size) {
         for(star in starsSaved) {
             stars.add(star)
-            starViewModel.saveDataToFile(context = context, emptyList())
+        }
+    } else {
+        for(star in stars) {
+            starViewModel.saveDataToFile(context = context, stars)
         }
     }
 
@@ -67,7 +70,7 @@ fun AddStarInterface(context: Context) {
 
             Button(
                 onClick = {
-                    if (stars.size<10 && starsSaved.size<10) {
+                    if (stars.size<10) {
                         starViewModel.addStar(Star(size = "S"))
                         starViewModel.saveDataToFile(context = context, stars)
                     } else {
@@ -86,7 +89,7 @@ fun AddStarInterface(context: Context) {
 
             Button(
                 onClick = {
-                    if (stars.size<10 && starsSaved.size<10) {
+                    if (stars.size<10) {
                         starViewModel.addStar(Star(size = "B"))
                         starViewModel.saveDataToFile(context = context, stars)
                     } else {
@@ -107,8 +110,7 @@ fun AddStarInterface(context: Context) {
                 onClick = {
                     printlnLogger(stars)
                     starViewModel.clearSky()
-                    val emptySky = mutableStateListOf<Star>()
-                    starViewModel.saveDataToFile(context = context, emptySky)
+                    starViewModel.saveDataToFile(context = context, listOf())
                     setIsVisible(true)
                 },
                 colors = ButtonDefaults.buttonColors(Color.Black)
