@@ -22,6 +22,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            consumerProguardFiles ("consumer-rules.pro")
         }
     }
     compileOptions {
@@ -39,6 +40,14 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)        // << --- ADD This
+        }
+    }
+
 }
 
 dependencies {
@@ -67,8 +76,8 @@ publishing {
             artifactId = "starlib"
             version = "1.0"
 
-            afterEvaluate {
-                from(components["release"])
+            pom {
+                description = "starlib for who want to create their sky"
             }
         }
     }
